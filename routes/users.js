@@ -68,6 +68,8 @@ router.get('/user',auth.verifyUser,(req,res,next)=>{
     .catch(next)
 })
 
+
+
 router.put('/updateProfile', auth.verifyUser,(req,res,next) => {
     User.findOneAndUpdate({_id: req.body._id}, req.body, {new: true}, (err, doc) => {
         if(!err){

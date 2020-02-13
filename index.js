@@ -4,7 +4,9 @@ const morgan = require('morgan');
 const userRouter = require('./routes/users');
 const uploadUserProfile = require('./routes/uploadUserImg');
 const productRouter = require('./routes/products');
+const buyProduct = require('./routes/buyProduct');
 const uploadProductImg = require('./routes/uploadProductImg');
+const getProductDetails = require('./routes/getProduct');
 const dotenv = require('dotenv').config();
 const auth = require('./auth');
 const cors = require('cors');
@@ -24,11 +26,14 @@ mongoose.connect(process.env.URL, { useNewUrlParser: true, useUnifiedTopology: t
 
     app.use('/users', userRouter);
     app.use('/uploadProfile', uploadUserProfile);
+    app.use('/getProduct', getProductDetails);
 
     app.use(auth.verifyUser);
 
     app.use('/products', productRouter);
     app.use('/uploadProductImg', uploadProductImg);
+    app.use('/buyProducts', buyProduct);
+
 
 
     app.use((err, req, res, next) => {
