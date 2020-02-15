@@ -3,7 +3,6 @@ const Buy = require('../models/buy');
 const auth = require('../auth');
 
 const router = express.Router();
-
 router.route('/')
     .get(auth.verifyUser,(req,res,next)=>{
         Buy.find({userId: req.user._id})
@@ -12,8 +11,6 @@ router.route('/')
             })
             .catch((err) => next(err));
     })
-
-
     .post(auth.verifyUser,(req,res,next) => {
 
         let buy = new Buy(req.body);
@@ -25,12 +22,10 @@ router.route('/')
                 res.json(buy);
             }).catch(next);
     })
-
     .put((req,res) => {
         res.statusCode = 405;
         res.json({message: "Invalid method for update data."})
     })
-
     .delete((req,res,next) => {
         Buy.deleteMany({ userId: req.user._id})
             .then((reply) => {
@@ -38,8 +33,6 @@ router.route('/')
             })
             .catch(next);
     })
-
-
 router.route('/:id')
     .get((req,res,next) => {
         Buy.findOne({userId: req.user._id, _id: req.params.id})
@@ -49,7 +42,6 @@ router.route('/:id')
                     res.json(buy);
             }).catch(next);
     })
-
     .delete((req,res,next) => {
         Buy.findByIdAndDelete({_id: req.params.id})
             .then((reply) => {
@@ -57,8 +49,6 @@ router.route('/:id')
             })
             .catch(next);
     })
-
-
     .post((req,res) => {
         res.statusCode = 405;
         res.json({message: "Invalid method for inserting data."})
@@ -81,7 +71,4 @@ router.route('/:id')
                 res.json(reply);  
         }).catch(next);
     })
-
-    
-
     module.exports = router;
