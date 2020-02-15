@@ -2,6 +2,7 @@ const express = require('express');
 const multer = require('multer');
 const path = require("path");
 
+//admin
 const storage = multer.diskStorage({
     destination: "./public/uploads/products",
     filename: (req, file, callback) => {
