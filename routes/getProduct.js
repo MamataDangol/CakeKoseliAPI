@@ -3,7 +3,7 @@ const Product = require('../models/products');
 
 const router = express.Router();
     
-
+//get product data
 router.get('/allProducts',(req,res,next)=>{
     Product.find({},(err,product)=>
     {
@@ -13,6 +13,9 @@ router.get('/allProducts',(req,res,next)=>{
         res.json(product)
     });
 })
+
+
+
 
 router.get('/catCakes',(req,res,next)=>{
     Product.find({productCategory: "Cakes"},(err,product)=>
